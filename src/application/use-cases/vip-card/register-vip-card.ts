@@ -5,7 +5,6 @@ import { VipCardsRepository } from '@application/repositories/vip-cards-reposito
 export interface RegisterVipCardProps {
   quantityOrder: number;
 }
-
 export class RegisterVipCard {
   constructor(private vipCardsRepository: VipCardsRepository) {}
 
