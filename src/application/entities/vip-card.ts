@@ -3,6 +3,7 @@ import { QuantityOrder } from './value-objects/quantity-order';
 
 interface VipCardProps {
   quantityOrder: QuantityOrder;
+  status: boolean;
 }
 
 export class VipCard {
@@ -35,5 +36,13 @@ export class VipCard {
 
   public set quantityOrder(quantityOrder: QuantityOrder) {
     this.props.quantityOrder = quantityOrder;
+  }
+
+  public get status(): boolean {
+    return this.props.status;
+  }
+
+  public set status(status: boolean) {
+    this.props.status = status;
   }
 }
