@@ -11,7 +11,7 @@ export interface CreateOrderProps {
 
 export interface CreateOrderRequest {
   vipCardId: string;
-  status: string;
+  status: Status;
 }
 
 export type CreateOrderResponse = void;
@@ -30,7 +30,7 @@ export class CreateOrder {
       throw new VipCardNotFound();
     }
 
-    const vipCard = new Order({ vipCardId, status: new Status('pending') });
+    const vipCard = new Order({ vipCardId, status: status });
     await this.props.orderRepository.create(vipCard);
   }
 }
