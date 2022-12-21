@@ -30,19 +30,19 @@ export class VipCard {
     return this._expirationAt;
   }
 
+  protected set quantityOrder(quantityOrder: QuantityOrder) {
+    this.props.quantityOrder = quantityOrder;
+  }
+
   public get quantityOrder(): QuantityOrder {
     return this.props.quantityOrder;
   }
 
-  public set quantityOrder(quantityOrder: QuantityOrder) {
-    this.props.quantityOrder = quantityOrder;
+  public cancel() {
+    this.props.status = false;
   }
 
   public get status(): boolean {
     return this.props.status;
-  }
-
-  public set status(status: boolean) {
-    this.props.status = status;
   }
 }

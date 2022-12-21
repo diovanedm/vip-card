@@ -2,17 +2,17 @@ import { QuantityOrder } from '@application/entities/value-objects/quantity-orde
 import { VipCard } from '@application/entities/vip-card';
 import { VipCardsRepository } from '@application/repositories/vip-cards-repository';
 
-export interface CreateVipCardProps {
+export interface CreateVipCardRequest {
   quantityOrder: number;
   status: boolean;
 }
 
-export class CreateVipCard {
-  constructor(private vipCardsRepository: VipCardsRepository) {
-    console.log('executou aa');
-  }
+export type CreateVipCardResponse = void;
 
-  async execute(request: CreateVipCardProps) {
+export class CreateVipCard {
+  constructor(private vipCardsRepository: VipCardsRepository) {}
+
+  async execute(request: CreateVipCardRequest): Promise<CreateVipCardResponse> {
     const { quantityOrder, status } = request;
 
     const vipCard = new VipCard({
@@ -20,19 +20,12 @@ export class CreateVipCard {
       status: status,
     });
 
-    console.log('executou');
-
-    console.log('status: ' + vipCard.status);
-
     if (!vipCard.status) {
-      console.log('entrou aqui');
       throw new Error(
         'it is not possible to create a vip card with canceled status',
       );
     }
 
     await this.vipCardsRepository.create(vipCard);
-
-    return vipCard;
   }
 }
