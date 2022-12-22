@@ -9,7 +9,7 @@ describe('Create VIP-CARD', () => {
     const createVipCard = new CreateVipCard(inMemoryVipCardsRepository);
 
     createVipCard.execute({ quantityOrder: 1, status: true });
-
+    console.log(vipCards[0]);
     expect(vipCards).toHaveLength(1);
   });
 

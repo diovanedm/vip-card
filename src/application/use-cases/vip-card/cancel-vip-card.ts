@@ -1,6 +1,7 @@
 import { QuantityOrder } from '@application/entities/value-objects/quantity-order';
 import { VipCard } from '@application/entities/vip-card';
 import { VipCardsRepository } from '@application/repositories/vip-cards-repository';
+import { Injectable } from '@nestjs/common';
 import { VipCardNotFound } from './errors/vip-card-not-found';
 
 export interface CancelVipCardRequest {
@@ -9,6 +10,7 @@ export interface CancelVipCardRequest {
 
 export type CancelVipCardResponse = void;
 
+@Injectable()
 export class CancelVipCard {
   constructor(private vipCardsRepository: VipCardsRepository) {}
 

@@ -1,0 +1,29 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model VipCard {
+  id            String    @id
+  quantityOrder Int
+  status        Boolean
+  expirationAt  DateTime?
+  createdAt     DateTime  @default(now())
+  Order         Order[]
+}
+
+model Order {
+  id         String    @id
+  status     String
+  canceledAt DateTime?
+  createdAt  DateTime  @default(now())
+  vipCard    VipCard   @relation(references: [id], fields: [vipCardId])
+  vipCardId  String
+}

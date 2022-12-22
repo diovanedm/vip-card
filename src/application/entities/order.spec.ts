@@ -1,5 +1,4 @@
 import { Order } from './order';
-import { Status } from './value-objects/status';
 
 describe('Order', () => {
   it('should be able to create a order', () => {

@@ -1,5 +1,5 @@
 import { Order } from '@application/entities/order';
-import { OrdersRepository } from '@application/repositories/orders-repository copy';
+import { OrdersRepository } from '@application/repositories/orders-repository';
 
 export class InMemoryOrdersRepository implements OrdersRepository {
   public orders: Order[] = [];

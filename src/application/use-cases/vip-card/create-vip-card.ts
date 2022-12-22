@@ -1,6 +1,7 @@
 import { QuantityOrder } from '@application/entities/value-objects/quantity-order';
 import { VipCard } from '@application/entities/vip-card';
 import { VipCardsRepository } from '@application/repositories/vip-cards-repository';
+import { Injectable } from '@nestjs/common';
 
 export interface CreateVipCardRequest {
   quantityOrder: number;
@@ -9,6 +10,7 @@ export interface CreateVipCardRequest {
 
 export type CreateVipCardResponse = void;
 
+@Injectable()
 export class CreateVipCard {
   constructor(private vipCardsRepository: VipCardsRepository) {}
 

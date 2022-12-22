@@ -1,7 +1,8 @@
 import { Order } from '@application/entities/order';
 import { Status } from '@application/entities/value-objects/status';
-import { OrdersRepository } from '@application/repositories/orders-repository copy';
+import { OrdersRepository } from '@application/repositories/orders-repository';
 import { VipCardsRepository } from '@application/repositories/vip-cards-repository';
+import { HttpCode, Injectable } from '@nestjs/common';
 import { VipCardNotFound } from '../vip-card/errors/vip-card-not-found';
 
 export interface CreateOrderProps {
@@ -15,7 +16,7 @@ export interface CreateOrderRequest {
 }
 
 export type CreateOrderResponse = void;
-
+@Injectable()
 export class CreateOrder {
   constructor(private props: CreateOrderProps) {}
 

@@ -27,6 +27,14 @@ export class Order {
     return this.props.vipCardId;
   }
 
+  public reject() {
+    this.status = 'rejected';
+  }
+
+  public accept() {
+    this.status = 'resolved';
+  }
+
   public set status(status: Status) {
     this.props.status = status;
   }
