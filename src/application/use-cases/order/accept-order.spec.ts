@@ -19,7 +19,7 @@ describe('Accept Order', () => {
       orderRepository: inMemoryOrdersRepository,
     });
 
-    await createVipCard.execute({ quantityOrder: 1, status: true });
+    await createVipCard.execute();
     await createOrder.execute({ vipCardId: vipCards[0].id, status: 'pending' });
 
     const acceptOrder = new AcceptOrder(inMemoryOrdersRepository);
@@ -40,7 +40,7 @@ describe('Accept Order', () => {
       orderRepository: inMemoryOrdersRepository,
     });
 
-    await createVipCard.execute({ quantityOrder: 1, status: true });
+    await createVipCard.execute();
     await createOrder.execute({ vipCardId: vipCards[0].id, status: 'pending' });
 
     const acceptOrder = new AcceptOrder(inMemoryOrdersRepository);

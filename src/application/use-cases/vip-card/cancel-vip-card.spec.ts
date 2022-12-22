@@ -11,7 +11,7 @@ describe('Cancel VIP-CARD', () => {
     const createVipCard = new CreateVipCard(inMemoryVipCardsRepository);
     const cancelVipCard = new CancelVipCard(inMemoryVipCardsRepository);
 
-    await createVipCard.execute({ quantityOrder: 0, status: true });
+    await createVipCard.execute();
     await cancelVipCard.execute({ id: vipCards[0].id });
 
     expect(vipCards[0].status).toEqual(false);
@@ -23,7 +23,7 @@ describe('Cancel VIP-CARD', () => {
     const createVipCard = new CreateVipCard(inMemoryVipCardsRepository);
     const cancelVipCard = new CancelVipCard(inMemoryVipCardsRepository);
 
-    await createVipCard.execute({ quantityOrder: 0, status: true });
+    await createVipCard.execute();
 
     expect(
       async () => await cancelVipCard.execute({ id: '123456' }),

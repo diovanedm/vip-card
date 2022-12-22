@@ -8,17 +8,7 @@ describe('Create VIP-CARD', () => {
 
     const createVipCard = new CreateVipCard(inMemoryVipCardsRepository);
 
-    createVipCard.execute({ quantityOrder: 1, status: true });
-    console.log(vipCards[0]);
+    await createVipCard.execute();
     expect(vipCards).toHaveLength(1);
-  });
-
-  it('should not be able to create a VIP-CARD with canceled status', () => {
-    const inMemoryVipCardsRepository = new InMemoryVipCardsRepository();
-    const createVipCard = new CreateVipCard(inMemoryVipCardsRepository);
-
-    expect(async () =>
-      createVipCard.execute({ quantityOrder: 1, status: false }),
-    ).rejects.toThrow();
   });
 });

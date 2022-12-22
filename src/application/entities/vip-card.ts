@@ -1,19 +1,17 @@
 import { randomUUID } from 'node:crypto';
 import { QuantityOrder } from './value-objects/quantity-order';
 
-interface VipCardProps {
-  quantityOrder: QuantityOrder;
-  status: boolean;
-}
-
 export class VipCard {
   private _id: string;
   private _createdAt: Date;
   private _expirationAt: Date;
+  private _quantityOrder: QuantityOrder;
+  private _status: boolean;
 
-  constructor(private props: VipCardProps) {
+  constructor() {
     this._id = randomUUID();
-
+    this._status = true;
+    this._quantityOrder = new QuantityOrder(0);
     this._createdAt = new Date();
     this._expirationAt = new Date(this._createdAt.getMonth() + 6);
   }
@@ -30,19 +28,19 @@ export class VipCard {
     return this._expirationAt;
   }
 
-  protected set quantityOrder(quantityOrder: QuantityOrder) {
-    this.props.quantityOrder = quantityOrder;
+  public set quantityOrder(quantityOrder: QuantityOrder) {
+    this._quantityOrder = quantityOrder;
   }
 
   public get quantityOrder(): QuantityOrder {
-    return this.props.quantityOrder;
+    return this._quantityOrder;
   }
 
   public cancel() {
-    this.props.status = false;
+    this._status = false;
   }
 
   public get status(): boolean {
-    return this.props.status;
+    return this._status;
   }
 }

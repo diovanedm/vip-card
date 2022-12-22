@@ -1,7 +1,7 @@
 import { InMemoryOrdersRepository } from '@test/repositories/in-memory-orders-repository';
 import { InMemoryVipCardsRepository } from '@test/repositories/in-memory-vip-cards-repository';
-import { VipCardNotFound } from '../vip-card/errors/vip-card-not-found';
 import { CreateVipCard } from '../vip-card/create-vip-card';
+import { VipCardNotFound } from '../vip-card/errors/vip-card-not-found';
 import { CreateOrder } from './create-order';
 
 describe('Create Order', () => {
@@ -18,7 +18,7 @@ describe('Create Order', () => {
       orderRepository: inMemoryOrdersRepository,
     });
 
-    await createVipCard.execute({ quantityOrder: 1, status: true });
+    await createVipCard.execute();
     await createOrder.execute({ vipCardId: vipCards[0].id, status: 'pending' });
 
     expect(orders[0].vipCardId).toEqual(vipCards[0].id);
@@ -34,7 +34,7 @@ describe('Create Order', () => {
       orderRepository: inMemoryOrdersRepository,
     });
 
-    createVipCard.execute({ quantityOrder: 1, status: true });
+    createVipCard.execute();
 
     expect(
       async () =>
