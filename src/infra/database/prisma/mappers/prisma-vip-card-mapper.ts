@@ -1,4 +1,6 @@
+import { VipCard as RawVipCard } from '@prisma/client';
 import { VipCard } from '@application/entities/vip-card';
+import { QuantityOrder } from '@application/entities/value-objects/quantity-order';
 
 export class PrismaVipCardMapper {
   static toPrisma(vipCard: VipCard) {
@@ -9,5 +11,16 @@ export class PrismaVipCardMapper {
       createdAt: vipCard.createdAt,
       expirationAt: vipCard.expirationAt,
     };
+  }
+
+  static toDomain(raw: RawVipCard): VipCard {
+    return new VipCard(
+      {
+        quantityOrder: new QuantityOrder(raw.quantityOrder),
+        status: raw.status,
+        createdAt: raw.createdAt,
+      },
+      raw.id,
+    );
   }
 }

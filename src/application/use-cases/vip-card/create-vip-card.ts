@@ -1,3 +1,4 @@
+import { QuantityOrder } from '@application/entities/value-objects/quantity-order';
 import { VipCard } from '@application/entities/vip-card';
 import { VipCardsRepository } from '@application/repositories/vip-cards-repository';
 import { Injectable } from '@nestjs/common';
@@ -9,7 +10,10 @@ export class CreateVipCard {
   constructor(private vipCardsRepository: VipCardsRepository) {}
 
   async execute(): Promise<CreateVipCardResponse> {
-    const vipCard = new VipCard();
+    const vipCard = new VipCard({
+      quantityOrder: new QuantityOrder(0),
+      status: true,
+    });
 
     if (!vipCard.status) {
       throw new Error(

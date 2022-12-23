@@ -5,12 +5,12 @@ import { CancelVipCard } from '@application/use-cases/vip-card/cancel-vip-card';
 import { CreateVipCard } from '@application/use-cases/vip-card/create-vip-card';
 import { DatabaseModule } from '@infra/database/database.module';
 import { Module } from '@nestjs/common';
-import { CardController } from './controllers/card.controller';
+import { OrderController } from './controllers/order.controller';
 import { VipCardController } from './controllers/vip-card.controller';
 
 @Module({
   imports: [DatabaseModule],
-  controllers: [VipCardController, CardController],
+  controllers: [VipCardController, OrderController],
   providers: [
     CreateVipCard,
     CancelVipCard,

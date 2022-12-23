@@ -1,10 +1,17 @@
 import { AcceptOrder } from '@application/use-cases/order/accept-order';
 import { CancelOrder } from '@application/use-cases/order/cancel-order';
 import { CreateOrder } from '@application/use-cases/order/create-order';
-import { Controller, HttpException, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpException,
+  HttpStatus,
+  Post,
+} from '@nestjs/common';
+import { CreateOrderBody } from '../dtos/create-order-body';
 
-@Controller('card')
-export class CardController {
+@Controller('order')
+export class OrderController {
   constructor(
     private createOrder: CreateOrder,
     private cancelOrder: CancelOrder,
@@ -12,17 +19,15 @@ export class CardController {
   ) {}
 
   @Post()
-  async create() {
+  async create(@Body() body: CreateOrderBody) {
     try {
+      const { vipCardId, status } = body;
       await this.createOrder.execute({
-        vipCardId: '58a4aa76-6f86-4348-bd8c-45f832e61338',
-        status: 'pending',
+        vipCardId,
+        status,
       });
     } catch (error) {
-      throw new HttpException(
-        'Status should not be false',
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new HttpException('Id not found', HttpStatus.NOT_FOUND);
     }
   }
 }

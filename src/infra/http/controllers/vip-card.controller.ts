@@ -1,6 +1,13 @@
 import { CancelVipCard } from '@application/use-cases/vip-card/cancel-vip-card';
 import { CreateVipCard } from '@application/use-cases/vip-card/create-vip-card';
-import { Controller, HttpException, HttpStatus, Post } from '@nestjs/common';
+import {
+  Controller,
+  HttpException,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 
 @Controller('vip-card')
 export class VipCardController {
@@ -11,13 +18,11 @@ export class VipCardController {
 
   @Post()
   async create() {
-    try {
-      await this.createVipCard.execute();
-    } catch (error) {
-      throw new HttpException(
-        'Status should not be false',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
+    await this.createVipCard.execute();
+  }
+
+  @Patch(':id/cancel')
+  async cancelar(@Param('id') id: string) {
+    await this.cancelVipCard.execute({ id });
   }
 }

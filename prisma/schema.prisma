@@ -20,10 +20,9 @@ model VipCard {
 }
 
 model Order {
-  id         String    @id
-  status     String
-  canceledAt DateTime?
-  createdAt  DateTime  @default(now())
-  vipCard    VipCard   @relation(references: [id], fields: [vipCardId])
-  vipCardId  String
+  id        String   @id
+  status    String
+  createdAt DateTime @default(now())
+  vipCard   VipCard  @relation(references: [id], fields: [vipCardId])
+  vipCardId String
 }

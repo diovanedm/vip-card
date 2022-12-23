@@ -4,15 +4,19 @@ import { Status } from './value-objects/status';
 export interface OrderProps {
   vipCardId: string;
   status: Status;
+  createdAt?: Date;
 }
 
 export class Order {
   private _id: string;
-  private _createdAt: Date;
+  private props: OrderProps;
 
-  constructor(private props: OrderProps) {
+  constructor(props: OrderProps) {
     this._id = randomUUID();
-    this._createdAt = new Date();
+    this.props = {
+      ...props,
+      createdAt: props.createdAt ?? new Date(),
+    };
   }
 
   public get id(): string {
@@ -20,7 +24,7 @@ export class Order {
   }
 
   public get createdAt(): Date {
-    return this._createdAt;
+    return this.props.createdAt;
   }
 
   public get vipCardId(): string {
@@ -28,11 +32,11 @@ export class Order {
   }
 
   public reject() {
-    this.status = 'rejected';
+    this.props.status = 'rejected';
   }
 
   public accept() {
-    this.status = 'resolved';
+    this.props.status = 'resolved';
   }
 
   public set status(status: Status) {
