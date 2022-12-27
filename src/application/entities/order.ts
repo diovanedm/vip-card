@@ -11,8 +11,8 @@ export class Order {
   private _id: string;
   private props: OrderProps;
 
-  constructor(props: OrderProps) {
-    this._id = randomUUID();
+  constructor(props: OrderProps, id?: string) {
+    this._id = id ?? randomUUID();
     this.props = {
       ...props,
       createdAt: props.createdAt ?? new Date(),

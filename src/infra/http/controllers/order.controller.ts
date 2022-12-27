@@ -6,6 +6,8 @@ import {
   Controller,
   HttpException,
   HttpStatus,
+  Param,
+  Patch,
   Post,
 } from '@nestjs/common';
 import { CreateOrderBody } from '../dtos/create-order-body';
@@ -18,14 +20,28 @@ export class OrderController {
     private acceptOrder: AcceptOrder,
   ) {}
 
-  @Post()
-  async create(@Body() body: CreateOrderBody) {
+  @Post(':id')
+  async create(@Param('id') vipCardId: string) {
     try {
-      const { vipCardId, status } = body;
-      await this.createOrder.execute({
-        vipCardId,
-        status,
-      });
+      await this.createOrder.execute(vipCardId);
+    } catch (error) {
+      throw new HttpException('Id not found', HttpStatus.NOT_FOUND);
+    }
+  }
+
+  @Patch(':id/accept')
+  async accept(@Param('id') id: string) {
+    try {
+      await this.acceptOrder.execute({ id });
+    } catch (error) {
+      throw new HttpException('Id not found', HttpStatus.NOT_FOUND);
+    }
+  }
+
+  @Patch(':id/cancel')
+  async cancel(@Param('id') id: string) {
+    try {
+      await this.cancelOrder.execute({ id });
     } catch (error) {
       throw new HttpException('Id not found', HttpStatus.NOT_FOUND);
     }

@@ -16,7 +16,8 @@ export class CancelOrder {
     const { id } = request;
 
     const order = await this.ordersRepository.findById(id);
-
+    console.log('order');
+    console.log(order);
     if (!order) {
       throw new OrderNotFound();
     }

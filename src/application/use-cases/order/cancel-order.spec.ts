@@ -20,7 +20,7 @@ describe('Cancel Order', () => {
     );
 
     await createVipCard.execute();
-    await createOrder.execute({ vipCardId: vipCards[0].id, status: 'pending' });
+    await createOrder.execute(vipCards[0].id);
 
     const cancelOrder = new CancelOrder(inMemoryOrdersRepository);
     await cancelOrder.execute({ id: orders[0].id });
@@ -41,7 +41,7 @@ describe('Cancel Order', () => {
     );
 
     await createVipCard.execute();
-    await createOrder.execute({ vipCardId: vipCards[0].id, status: 'pending' });
+    await createOrder.execute(vipCards[0].id);
 
     const cancelOrder = new CancelOrder(inMemoryOrdersRepository);
 

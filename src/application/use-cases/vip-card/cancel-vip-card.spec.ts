@@ -17,7 +17,7 @@ describe('Cancel VIP-CARD', () => {
     expect(vipCards[0].status).toEqual(false);
   });
 
-  it('not should be able to cancel a VIP-CARD with invalid id', async () => {
+  it('should not be able to cancel a VIP-CARD with invalid id', async () => {
     const inMemoryVipCardsRepository = new InMemoryVipCardsRepository();
 
     const createVipCard = new CreateVipCard(inMemoryVipCardsRepository);
